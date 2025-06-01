@@ -50,7 +50,7 @@ Flutter based mobile e-commerce application developed with a modern and clean de
 ## 📷 Screenshots
 
 ### 🏠 Home
-![Home](assets/screenshots/Screenshot_1.png)
+ <img src="assets/screenshots/Screenshot_1.png" width="300"/>
 
 ### ❤️ Favorites
 ![Favorites](assets/screenshots/Screenshot_2.png)
