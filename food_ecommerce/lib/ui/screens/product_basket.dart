@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ecommerce/data/entity/product_ecommerce.dart';
 import 'package:food_ecommerce/ui/cubits/product_basket_cubit.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductBasketScreen extends StatelessWidget {
   final String userName;
@@ -10,13 +11,7 @@ class ProductBasketScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Cart"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      appBar: AppBar(title: const Text("My Cart")),
       body: BlocBuilder<ProductBasketCubit, List<ProductEcommerce>>(
         builder: (context, basketItems) {
           if (basketItems.isEmpty) {
@@ -72,9 +67,9 @@ class ProductBasketScreen extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         product.name,
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
@@ -109,6 +104,10 @@ class ProductBasketScreen extends StatelessWidget {
                                       ),
                                       child: Text(
                                         "₺${product.price.toStringAsFixed(0)}",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -122,8 +121,10 @@ class ProductBasketScreen extends StatelessWidget {
                                       ),
                                       child: Text(
                                         "Total: ₺${toplamFiyat.toStringAsFixed(0)}",
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          color: Colors.deepPurple,
                                         ),
                                       ),
                                     ),

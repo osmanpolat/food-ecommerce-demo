@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'E-commerce App',
         theme: AppTheme.lightTheme,
         home: const MainScreen(),
       ),

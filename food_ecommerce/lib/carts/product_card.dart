@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_ecommerce/data/entity/product_ecommerce.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEcommerce product;
@@ -66,11 +67,18 @@ class ProductCard extends StatelessWidget {
                           product.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
                         ),
                         Text(
                           "₺${product.price}",
-                          style: const TextStyle(color: Colors.deepPurple),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13,
+                            color: Colors.deepPurple,
+                          ),
                         ),
                       ],
                     ),
