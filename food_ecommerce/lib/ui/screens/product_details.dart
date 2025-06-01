@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ecommerce/data/entity/product_ecommerce.dart';
+import 'package:food_ecommerce/ui/cubits/favorite_cubit.dart';
+import 'package:food_ecommerce/ui/cubits/product_basket_cubit.dart';
 import 'package:food_ecommerce/ui/cubits/product_details_cubit.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -19,6 +21,22 @@ class ProductDetails extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           title: const Text("Product Detail"),
+          actions: [
+            BlocBuilder<FavoriteCubit, List<int>>(
+              builder: (context, favorites) {
+                final isFav = favorites.contains(product.id);
+                return IconButton(
+                  icon: Icon(
+                    isFav ? Icons.favorite : Icons.favorite_border,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    context.read<FavoriteCubit>().toggleFavorite(product.id);
+                  },
+                );
+              },
+            ),
+          ],
         ),
         body: BlocBuilder<ProductDetailsCubit, int>(
           builder: (context, count) {
@@ -80,10 +98,16 @@ class ProductDetails extends StatelessWidget {
                         backgroundColor: Colors.deepPurple,
                       ),
                       onPressed: () {
-                        context.read<ProductDetailsCubit>().addToCart(
-                          product: product,
-                          quantity: count,
-                          userName: "osman_polat",
+                        context.read<ProductBasketCubit>().addToBasket(
+                          ProductEcommerce(
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            quantity: count,
+                            image: product.image,
+                            category: product.category,
+                            brand: product.brand,
+                          ),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Basket Added")),

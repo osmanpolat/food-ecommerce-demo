@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class ProductEcommerce {
   int id;
   String name;
   String image;
   String category;
-  int price;
+  double price;
   String brand;
   int quantity;
 
@@ -24,9 +23,10 @@ class ProductEcommerce {
       name: json["ad"],
       image: json["resim"],
       category: json["kategori"],
-      price: int.parse(json["fiyat"].toString()),
+      price: double.parse(json["fiyat"].toString()),
       brand: json["marka"],
-      quantity: 1,
+      quantity:
+          json["siparisAdeti"] != null ? int.parse(json["siparisAdeti"]) : 1,
     );
   }
 }

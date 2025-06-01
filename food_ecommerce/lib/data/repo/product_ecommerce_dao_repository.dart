@@ -19,7 +19,7 @@ class ProductEcommerceDaoRepository {
     required String name,
     required String image,
     required String category,
-    required int price,
+    required double price,
     required String brand,
     required int quantity,
     required String username,
@@ -36,18 +36,17 @@ class ProductEcommerceDaoRepository {
     };
     await Dio().post(url, data: FormData.fromMap(data));
   }
-Future<List<ProductEcommerce>> getBasketItems(String userName) async {
-  var url = "http://kasimadalan.pe.hu/urunler/sepettekiUrunleriGetir.php";
-  var data = {"username": userName};
-  var response = await Dio().post(url, data: FormData.fromMap(data));
-  return parseProductEcommerce(response.data.toString());
-}
 
-Future<void> removeFromBasket(String productId, String userName) async {
-  var url = "http://kasimadalan.pe.hu/urunler/sepettenUrunSil.php";
-  var data = {"id": productId, "username": userName};
-  await Dio().post(url, data: FormData.fromMap(data));
-}
+  Future<List<ProductEcommerce>> getBasketItems(String userName) async {
+    var url = "http://kasimadalan.pe.hu/urunler/sepettekiUrunleriGetir.php";
+    var data = {"username": userName};
+    var response = await Dio().post(url, data: FormData.fromMap(data));
+    return parseProductEcommerce(response.data.toString());
+  }
 
-
+  Future<void> removeFromBasket(String productId, String userName) async {
+    var url = "http://kasimadalan.pe.hu/urunler/sepettenUrunSil.php";
+    var data = {"id": productId, "username": userName};
+    await Dio().post(url, data: FormData.fromMap(data));
+  }
 }

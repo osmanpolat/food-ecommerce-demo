@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ecommerce/data/entity/product_ecommerce.dart';
+
 import 'package:food_ecommerce/data/repo/product_ecommerce_dao_repository.dart';
 
 class ProductDetailsCubit extends Cubit<int> {
