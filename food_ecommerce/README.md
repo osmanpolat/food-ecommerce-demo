@@ -1,16 +1,51 @@
-# food_ecommerce
+# Ecommerce App Demo Project
 
-A new Flutter project.
+Flutter based mobile e-commerce application developed with a modern and clean design. Includes cart, favorite products and detailed product reviews.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- Listing all products in **GridView** structure
+- Product filtering with **Search feature**
+- Smart cart integration:
+- If the same product is added more than once, **the quantity is increased**
+- Quantity and total price are shown on the product card
+- Adding the product to the cart with **one click**
+- Adding/removing from favorites
+- Easy page transition with **BottomNavigationBar**
+- Material 3 UI compatible design
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### ❤️ Favorites
+
+- List products added to favorites
+- Remove from favorites
+- Access to favorites from detail page
+
+---
+
+### 🛒 Basket
+
+- Showing products added to the cart card by card
+- Calculating the total amount according to the number of products
+- Deleting products
+- Completing the order with the "Confirm Cart" button
+- Calculating the total cart amount
+
+---
+
+## 🧱 Technologies
+
+- **Flutter** and **Dart**
+- `flutter_bloc` state management **BLOC**
+- Responsive design (mobile compatible)
+- Stateless/Stateful widget architecture
+- Offline demo work with local product list data
+- Web Service API Usage (Restful Architecture, Json Parse)
+
+---
+
+## 📷 Screenshots
+
