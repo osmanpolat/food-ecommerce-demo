@@ -49,6 +49,9 @@ Flutter based mobile e-commerce application developed with a modern and clean de
 
 ## 📷 Screenshots
 
+<table>
+  <tr>
+  
 ### 🏠 Home
  <img src="assets/screenshots/Screenshot_1.png" width="300"/>
 
@@ -58,6 +61,8 @@ Flutter based mobile e-commerce application developed with a modern and clean de
 ### 🛒 Cart
  <img src="assets/screenshots/Screenshot_3.png" width="300"/>
 
+</tr>
+</table>
 ---
 
 ## License
