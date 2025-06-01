@@ -5,7 +5,6 @@ import 'package:food_ecommerce/ui/cubits/favorite_cubit.dart';
 import 'package:food_ecommerce/ui/cubits/main_cubit.dart';
 import 'package:food_ecommerce/ui/cubits/product_basket_cubit.dart';
 import 'package:food_ecommerce/ui/cubits/product_details_cubit.dart';
-
 import 'package:food_ecommerce/ui/screens/main_screen.dart';
 
 void main() {

@@ -49,3 +49,18 @@ Flutter based mobile e-commerce application developed with a modern and clean de
 
 ## 📷 Screenshots
 
+### 🏠 Home
+![Home](assets/screenshots/Screenshot_1.png)
+
+### ❤️ Favorites
+![Favorites](assets/screenshots/Screenshot_2.png)
+
+### 🛒 Cart
+![Cart](assets/screenshots/Screenshot_3.png)
+
+---
+
+## License
+
+This project is created for educational purposes.
+

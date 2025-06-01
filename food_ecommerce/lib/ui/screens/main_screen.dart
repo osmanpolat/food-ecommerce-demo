@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar:
           _currentIndex == 0
               ? AppBar(
-                title: const Text("Products"),
+                title: const Text("Home"),
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.favorite, color: Colors.white),
