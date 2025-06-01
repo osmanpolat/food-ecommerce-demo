@@ -3,26 +3,28 @@ import 'package:food_ecommerce/data/entity/product_ecommerce.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEcommerce product;
+  final bool isFavorite;
   final VoidCallback onTap;
   final VoidCallback onFavoriteToggle;
-  final bool isFavorite;
+  final VoidCallback onAddToCart;
 
   const ProductCard({
+    super.key,
     required this.product,
+    required this.isFavorite,
     required this.onTap,
     required this.onFavoriteToggle,
-    required this.isFavorite,
-    super.key,
+    required this.onAddToCart,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: onTap,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Stack(
@@ -33,8 +35,8 @@ class ProductCard extends StatelessWidget {
                     ),
                     child: Image.network(
                       "http://kasimadalan.pe.hu/urunler/resimler/${product.image}",
-                      fit: BoxFit.cover,
                       width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(
@@ -43,7 +45,7 @@ class ProductCard extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(
                         isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: Colors.redAccent,
+                        color: Colors.red,
                       ),
                       onPressed: onFavoriteToggle,
                     ),
@@ -52,18 +54,33 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    product.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "₺${product.price}",
+                          style: const TextStyle(color: Colors.deepPurple),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    "₺${product.price}",
-                    style: const TextStyle(color: Colors.deepPurple),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.add_circle,
+                      color: Colors.deepPurple,
+                    ),
+                    onPressed: onAddToCart,
                   ),
                 ],
               ),

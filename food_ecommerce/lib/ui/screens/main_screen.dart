@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_ecommerce/carts/product_card.dart';
-import 'package:food_ecommerce/data/entity/product_ecommerce.dart';
-import 'package:food_ecommerce/ui/cubits/favorite_cubit.dart';
-import 'package:food_ecommerce/ui/cubits/main_cubit.dart';
+import 'package:food_ecommerce/components/app_theme.dart';
+import 'package:food_ecommerce/ui/screens/home_screen.dart';
 import 'package:food_ecommerce/ui/screens/favorites_screen.dart';
 import 'package:food_ecommerce/ui/screens/product_basket.dart';
-import 'package:food_ecommerce/ui/screens/product_details.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,106 +12,55 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<MainCubit>().loadProducts();
+  int _currentIndex = 0;
+
+  final _pages = const [
+    HomeScreen(),
+    FavoritesScreen(),
+    ProductBasketScreen(userName: "osman_polat"),
+  ];
+
+  void _setCurrentPage(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Products"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const FavoritesScreen()),
-              );
-            },
+      appBar:
+          _currentIndex == 0
+              ? AppBar(
+                title: const Text("Products"),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.favorite, color: Colors.white),
+                    onPressed: () => _setCurrentPage(1), // FAVORITES
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                    onPressed: () => _setCurrentPage(2), // BASKET
+                  ),
+                  const SizedBox(width: 16),
+                ],
+              )
+              : null,
+      body: IndexedStack(index: _currentIndex, children: _pages),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _setCurrentPage,
+        selectedItemColor: AppTheme.primaryColor,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
           ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) =>
-                          const ProductBasketScreen(userName: "osman_polat"),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (query) {
-                context.read<MainCubit>().search(query);
-              },
-              decoration: InputDecoration(
-                hintText: "Search",
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: BlocBuilder<MainCubit, List<ProductEcommerce>>(
-              builder: (context, productList) {
-                if (productList.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
-                return BlocBuilder<FavoriteCubit, List<int>>(
-                  builder: (context, favorites) {
-                    return GridView.builder(
-                      padding: const EdgeInsets.all(8),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 2 / 2.8,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
-                          ),
-                      itemCount: productList.length,
-                      itemBuilder: (context, index) {
-                        final product = productList[index];
-                        final isFav = favorites.contains(product.id);
-
-                        return ProductCard(
-                          product: product,
-                          isFavorite: isFav,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (_) => ProductDetails(product: product),
-                              ),
-                            );
-                          },
-                          onFavoriteToggle: () {
-                            context.read<FavoriteCubit>().toggleFavorite(
-                              product.id,
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Basket',
           ),
         ],
       ),

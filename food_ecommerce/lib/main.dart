@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_ecommerce/components/app_theme.dart';
 import 'package:food_ecommerce/ui/cubits/favorite_cubit.dart';
 import 'package:food_ecommerce/ui/cubits/main_cubit.dart';
 import 'package:food_ecommerce/ui/cubits/product_basket_cubit.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => MainCubit()),
+        BlocProvider(create: (_) => MainCubit()..loadProducts()),
         BlocProvider(create: (_) => ProductDetailsCubit()),
         BlocProvider(create: (_) => FavoriteCubit()),
         BlocProvider(create: (_) => ProductBasketCubit()),
@@ -26,9 +27,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
+        theme: AppTheme.lightTheme,
         home: const MainScreen(),
       ),
     );

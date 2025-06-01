@@ -8,9 +8,19 @@ class ProductBasketCubit extends Cubit<List<ProductEcommerce>> {
     emit(items);
   }
 
-  void addToBasket(ProductEcommerce product) {
-    final updatedList = [...state, product];
-    emit(updatedList);
+  void addToBasket(ProductEcommerce newProduct) {
+    final existingIndex = state.indexWhere((item) => item.id == newProduct.id);
+
+    if (existingIndex != -1) {
+      final updatedItem = state[existingIndex];
+      updatedItem.quantity += newProduct.quantity;
+
+      final updatedList = List<ProductEcommerce>.from(state);
+      updatedList[existingIndex] = updatedItem;
+      emit(updatedList);
+    } else {
+      emit([...state, newProduct]);
+    }
   }
 
   void removeFromBasket(String id, String userName) {

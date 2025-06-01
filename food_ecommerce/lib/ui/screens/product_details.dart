@@ -43,16 +43,19 @@ class ProductDetails extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(
-                    "http://kasimadalan.pe.hu/urunler/resimler/${product.image}",
-                    height: 200,
+                  Center(
+                    child: Image.network(
+                      "http://kasimadalan.pe.hu/urunler/resimler/${product.image}",
+                      height: 160,
+                    ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   Text(
                     product.name,
                     style: const TextStyle(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -62,40 +65,58 @@ class ProductDetails extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 20,
                       color: Colors.deepPurple,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove_circle_outline),
-                        onPressed:
-                            () =>
-                                context.read<ProductDetailsCubit>().decrease(),
-                      ),
-                      Text(
-                        '$count',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                  const SizedBox(height: 32),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed:
+                              () =>
+                                  context
+                                      .read<ProductDetailsCubit>()
+                                      .decrease(),
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.add_circle_outline),
-                        onPressed:
-                            () =>
-                                context.read<ProductDetailsCubit>().increase(),
-                      ),
-                    ],
+                        Text(
+                          '$count',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed:
+                              () =>
+                                  context
+                                      .read<ProductDetailsCubit>()
+                                      .increase(),
+                        ),
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
                       ),
                       onPressed: () {
                         context.read<ProductBasketCubit>().addToBasket(
@@ -115,8 +136,12 @@ class ProductDetails extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       child: const Text(
-                        "Basket Add",
-                        style: TextStyle(fontSize: 18),
+                        "Sepete Ekle",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
